@@ -12,11 +12,11 @@
   <div>
     <button class="btn btn-outline-primary" (click)="getProcessosPorNumero()">
       <i class="fa fa-plus-circle"></i>&nbsp;
-      Listar Por Numero
+      Listar Processo
     </button>
     <button class="btn btn-outline-primary" (click)="getProcessosData()">
       <i class="fa fa-plus-circle"></i>&nbsp;
-      Listar Por Data
+      Listar Data
     </button>
   </div>
 </div>
@@ -37,9 +37,16 @@
         <td>{{processo.id}}</td>
         <td>{{processo.numeroProcesso}}</td>
         <td>{{processo.estado}}</td>
-        <td>{{processo.dataCriacao}}</td>
-        <td>{{processo.valor}}</td>
-        <td>{{processo.ativo}}</td>
+        <td>{{processo.dataCriacao | date: 'dd/MM/yyyy'}}</td>
+        <td>{{processo.valor | number:'1.0-0'}}</td>
+        <td>
+          <div class= "btn-group">
+            <i *ngIf="processo.ativo" class="btn btn-sm btn-success">
+            </i>
+            <i *ngIf="!processo.ativo" class="btn btn-sm btn-danger">
+            </i>
+          </div>   
+        </td>
         <td>{{processo.clienteId}}</td>
       </tr>
     </tbody>

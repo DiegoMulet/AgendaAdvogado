@@ -42,6 +42,7 @@ export class ProcessoComponent implements OnInit {
     }
 
     getProcessosData() {
+      this.filtros = new ProcessoFiltros();
       this.filtros.dataCriacao = new Date(this.datePipe.transform(this.filtro, 'dd/MM/yyyy'));
       this.processoService.getAllProcessoByFiltros(this.filtros).subscribe(
         (processos: Processo[]) => {
@@ -52,6 +53,7 @@ export class ProcessoComponent implements OnInit {
       }
 
       getProcessosPorNumero() {
+        this.filtros = new ProcessoFiltros();
         this.filtros.numeroProcesso = this.filtro;
         this.processoService.getAllProcessoByFiltros(this.filtros).subscribe(
           (processos: Processo[]) => {

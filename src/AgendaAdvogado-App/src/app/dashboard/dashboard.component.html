@@ -12,7 +12,7 @@
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Média Valor Processos RJ Empresa A</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">{{mediaValorProcessosCliente}}</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{mediaValorProcessosCliente | number:'1.0-0'}}</div>
             </div>
             <div class="col-auto">
               <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -28,7 +28,7 @@
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Soma Valor Processos Ativos</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">{{qtdValorPorcessosAtivos}}</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{qtdValorPorcessosAtivos | number:'1.0-0'}}</div>
             </div>
             <div class="col-auto">
               <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -44,7 +44,7 @@
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Processos com valor acima de 100 mil</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">{{qtdProcessosValorAcima}}</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{qtdProcessosValorAcima | number:'1.0-0'}}</div>
             </div>
             <div class="col-auto">
               <i class="fas fa-calendar fa-2x text-gray-300"></i>
