@@ -1,0 +1,122 @@
+<app-titulo [titulo]="titulo"></app-titulo>
+<form [formGroup]="registerForm">
+  <div class="row">
+    <div class="col-md-10">
+      <tabset>
+        <tab heading="Cliente">
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Nome</label>
+              <input type="text" class="form-control" [(ngModel)]="cliente.nome"
+                [ngClass]="{'is-invalid': registerForm.get('nome').errors && registerForm.get('nome').touched}"
+                formControlName="nome" placeholder="Insira o Nome">
+              <div *ngIf="registerForm.get('nome').hasError('required')
+              && registerForm.get('nome').touched" class="invalid-feedback">
+                Nome é obrigatório.
+              </div>
+              <div *ngIf="registerForm.get('nome').hasError('minlength')
+            && registerForm.get('nome').touched" class="invalid-feedback">
+                Nome deve ter no mínimo 4 Caracters.
+              </div>
+              <div *ngIf="registerForm.get('nome').hasError('maxlength')
+          && registerForm.get('nome').touched" class="invalid-feedback">
+                Nome deve ter no máximo 50 Caracters.
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-8">
+              <label>CNPJ</label>
+              <input type="text" class="form-control" [(ngModel)]="cliente.cnpj" [ngClass]="{'is-invalid': registerForm.get('cnpj').errors 
+              && registerForm.get('cnpj').touched}" formControlName="cnpj" placeholder="">
+              <div *ngIf="registerForm.get('cnpj').hasError('required')
+              && registerForm.get('cnpj').touched" class="invalid-feedback">
+                CNPJ é obrigatório.
+              </div>
+              <div *ngIf="registerForm.get('cnpj').hasError('minlength')" class="invalid-feedback">
+                Quantidade mínima de 10 caracteres.
+              </div>
+              <div *ngIf="registerForm.get('cnpj').hasError('maxlength')" class="invalid-feedback">
+                Quantidade máxima de 15 caracteres.
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-8">
+              <label>Estado</label>
+              <input type="text" [(ngModel)]="cliente.estado" [ngClass]="{'is-invalid': registerForm.get('estado').errors 
+              && registerForm.get('estado').touched}" class="form-control is-invalid" formControlName="estado"
+                placeholder="">
+              <div *ngIf="registerForm.get('estado').hasError('required')
+              && registerForm.get('estado').touched" class="invalid-feedback">
+                Estado é obrigatório.
+              </div>
+              <div *ngIf="registerForm.get('estado').hasError('minlength')" class="invalid-feedback">
+                Quantidade mínima de 4 caracteres.
+              </div>
+              <div *ngIf="registerForm.get('estado').hasError('maxlength')" class="invalid-feedback">
+                Quantidade máxima de 30 caracteres.
+              </div>             
+            </div>            
+          </div>
+        </tab>
+        <tab heading="Processos">
+          <div>
+            <div formArrayName="processos"
+              *ngFor="let processo of processos.controls; let i=index">
+              <hr>
+              <fieldset [formGroupName]="i" class="form-group">                
+                <legend class="d-flex justify-content-between capitalize">
+                  {{ processos.get(i+'.numeroProcesso').value == '' ?
+                    'Processos' :
+                    processos.get(i+'.numeroProcesso').value
+                  }}
+                  <button class="btn btn-sm btn-warning mb-1" (click)="removerProcesso(i)" >remove</button>
+                </legend>
+                
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label>Processo</label>
+                    <input type="text" class="form-control" formControlName="numeroProcesso" placeholder="Processo"
+                    [ngClass]="{'is-invalid': processos.get(i+'.numeroProcesso').errors && processos.get(i+'.numeroProcesso').touched}">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label>Estado</label>
+                    <input type="text" class="form-control" 
+                    [ngClass]="{'is-invalid': processos.get(i+'.estado').errors && processos.get(i+'.estado').touched}" 
+                    formControlName="estado" placeholder="Rio de Janeiro">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label>Valor</label>
+                    <input type="text" class="form-control"
+                    [ngClass]="{'is-invalid': processos.get(i+'.valor').errors && processos.get(i+'.valor').touched}" 
+                    formControlName="valor" placeholder="R$ 0.00">
+                  </div>
+                  <div class="form-group col-md-8">
+                    <label>Data Criação</label>
+                    <input type="datetime-local" class="form-control" formControlName="dataCriacao" placeholder="01/01/2019">
+                  </div>
+                  <div class="form-group col-md-2" style="text-align: center">
+                    <label >Ativo</label>
+                    <input type="checkbox" class="form-control" formControlName="ativo">
+                  </div>
+                  
+                </div>
+              </fieldset>
+            </div>
+            <button class="btn btn-outline-primary" (click)="adicionarProcesso()">
+              Adicionar Processo
+            </button>
+          </div>
+        </tab>        
+      </tabset>
+      <div class="row">
+        <div class="col-md-12 d-flex justify-content-end">
+          <!-- {{registerForm.value | json}} -->
+          <button [disabled]="!registerForm.valid" class="btn btn-success my-2" (click)="salvarCliente()" >Salvar
+            Alterações</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

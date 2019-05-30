@@ -1,0 +1,53 @@
+<app-titulo [titulo]="titulo"></app-titulo>
+<div class="d-flex">
+  <div class="form-inline mr-auto" >
+    <div class="form-group mb-2">
+      <label class="mr-2">Filtro:</label><input type="text" 
+      class="form-control mr-2" 
+      placeholder="buscar"
+      [(ngModel)]="filtro"
+      >
+    </div> 
+  </div>
+  <div>
+    <button class="btn btn-outline-primary" (click)="getProcessosPorNumero()">
+      <i class="fa fa-plus-circle"></i>&nbsp;
+      Listar Por Numero
+    </button>
+    <button class="btn btn-outline-primary" (click)="getProcessosData()">
+      <i class="fa fa-plus-circle"></i>&nbsp;
+      Listar Por Data
+    </button>
+  </div>
+</div>
+  <table class="table table-striped">
+    <thead class="thead-light">
+      <tr class="tr">
+        <th>Id</th>
+        <th>Processo</th>
+        <th>Estado</th>
+        <th>Data</th>
+        <th>Valor</th>
+        <th>Ativo</th>
+        <th>Cliente</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="processos && processos.length">
+      <tr *ngFor="let processo of processos">
+        <td>{{processo.id}}</td>
+        <td>{{processo.numeroProcesso}}</td>
+        <td>{{processo.estado}}</td>
+        <td>{{processo.dataCriacao}}</td>
+        <td>{{processo.valor}}</td>
+        <td>{{processo.ativo}}</td>
+        <td>{{processo.clienteId}}</td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="!processos || !processos.length">
+      <tr>
+        <td colspan="8" class="text-center">
+          <h4>Nenhum processo encontrado!</h4>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
